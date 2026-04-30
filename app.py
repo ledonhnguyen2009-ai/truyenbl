@@ -1,13 +1,17 @@
 import streamlit as st
 
-# Tiêu đề app
 st.set_page_config(page_title="App Truyện của Nguyên", page_icon="📚")
-st.title("📚 Kho Văn Bản / Truyện")
 
-# Ô để bạn dán nội dung văn bản
-text_input = st.text_area("Nhập hoặc dán nội dung văn bản vào đây:", height=300)
+st.title("📚 Đang đọc: Truyện BL")
 
-if text_input:
-    st.subheader("Nội dung hiển thị:")
-    st.write(text_input)
-    st.success("Đã hiển thị nội dung thành công!")
+# Lệnh để app tự đọc file truyện bạn vừa tải lên
+try:
+    with open("truyện bl.txt", "r", encoding="utf-8") as f:
+        noi_dung = f.read()
+    
+    # Hiển thị nội dung ra màn hình
+    st.markdown("---")
+    st.write(noi_dung)
+    
+except FileNotFoundError:
+    st.error("Không tìm thấy file truyện bl.txt trên GitHub!")
